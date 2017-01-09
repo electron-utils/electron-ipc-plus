@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>main2all</title>
+  </head>
+
+  <body>
+    <button id="clear">clear</button>
+    <button id="main2all">main2all</button>
+    <button id="main2all-exclude-self">main2all-exclude-self</button>
+    <button id="main2win">main2win</button>
+    <button id="main2win-reply">main2win-reply</button>
+    <button id="win2main-reply">win2main-reply</button>
+    <div id="logs">
+    </div>
+
+    <script>
+      const {ipcRenderer} = require('electron');
+      const ipcPlus = require('../index.js');
+      let logsEL = document.getElementById('logs');
+
+      function addLog(msg) {
+        let el = document.createElement('div');
+        el.innerText = msg;
+        logsEL.appendChild(el);
+      }
+
+      [
+        'app:main2all',
+        'app:main2all-exclude-self',
+        'app:main2win',
+      ].forEach(msg => {
+        ipcPlus.on(msg, (event, ...args) => {
+          addLog(`received "${msg}" at renderer process: ${args}`);
+        });
+      });
+
+      ipcPlus.on('app:main2win-reply', (event, ...args) => {
+        addLog(`received "app:main2win-reply" at renderer process: ${args}, reply: bar after 500ms`);
+        setTimeout(() => {
+          event.reply(null, 'bar');
+        }, 500);
+      });
+
+      ipcPlus.on('btn:clear', () => {
+        while (logsEL.firstChild) {
+          logsEL.removeChild(logsEL.firstChild);
+        }
+      });
+
+      // ====================
+      // handle buttons
+      // ====================
+
+      document.getElementById('clear').addEventListener('click', () => {
+        ipcPlus.sendToWins('btn:clear');
+      });
+      document.getElementById('main2all').addEventListener('click', () => {
+        ipcRenderer.send('btn:main2all');
+      });
+      document.getElementById('main2all-exclude-self').addEventListener('click', () => {
+        ipcRenderer.send('btn:main2all-exclude-self');
+      });
+      document.getElementById('main2win').addEventListener('click', () => {
+        ipcRenderer.send('btn:main2win');
+      });
+      document.getElementById('main2win-reply').addEventListener('click', () => {
+        ipcRenderer.send('btn:main2win-reply');
+      });
+      document.getElementById('win2main-reply').addEventListener('click', () => {
+        addLog('send app:win2main-reply foo');
+        ipcPlus.sendToMain('app:win2main-reply', 'foo', (err, ...args) => {
+          addLog(`received "app:win2main-reply" at renderer process: ${args}`);
+        });
+      });
+    </script>
+  </body>
+</html>

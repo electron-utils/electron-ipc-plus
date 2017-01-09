@@ -1,0 +1,30 @@
+{
+  "name": "electron-ipc-plus",
+  "version": "1.0.0",
+  "description": "Improved IPC operations for electron",
+  "main": "index.js",
+  "scripts": {
+    "start": "node run.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwu/electron-ipc-plus.git"
+  },
+  "keywords": [
+    "Electron",
+    "ipc"
+  ],
+  "author": "jwu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jwu/electron-ipc-plus/issues"
+  },
+  "homepage": "https://github.com/jwu/electron-ipc-plus",
+  "dependencies": {
+    "electron-platform": "^1.1.0"
+  },
+  "devDependencies": {
+    "electron": "^1.4.13"
+  }
+}
