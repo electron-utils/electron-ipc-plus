@@ -3,17 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>main2all</title>
+    <style>
+      hr {
+        height: 1px;
+        background: black;
+        border: 0;
+      }
+    </style>
   </head>
 
   <body>
     <button id="clear">clear</button>
+    <hr/>
+
     <button id="main2all">main2all</button>
     <button id="main2all-exclude-self">main2all-exclude-self</button>
+    <button id="main2wins">main2wins</button>
     <button id="main2win">main2win</button>
     <button id="main2win-reply">main2win-reply</button>
+    <hr/>
+
+    <button id="win2all">win2all</button>
+    <button id="win2all-exclude-self">win2all-exclude-self</button>
+    <button id="win2wins">win2wins</button>
     <button id="win2main-reply">win2main-reply</button>
-    <div id="logs">
-    </div>
+    <hr/>
+
+    <div id="logs"></div>
 
     <script>
       const {ipcRenderer} = require('electron');
@@ -29,7 +45,10 @@
       [
         'app:main2all',
         'app:main2all-exclude-self',
+        'app:main2wins',
         'app:main2win',
+        'app:win2all',
+        'app:win2wins',
       ].forEach(msg => {
         ipcPlus.on(msg, (event, ...args) => {
           addLog(`received "${msg}" at renderer process: ${args}`);
@@ -62,6 +81,9 @@
       document.getElementById('main2all-exclude-self').addEventListener('click', () => {
         ipcRenderer.send('btn:main2all-exclude-self');
       });
+      document.getElementById('main2wins').addEventListener('click', () => {
+        ipcRenderer.send('btn:main2wins');
+      });
       document.getElementById('main2win').addEventListener('click', () => {
         ipcRenderer.send('btn:main2win');
       });
@@ -73,6 +95,20 @@
         ipcPlus.sendToMain('app:win2main-reply', 'foo', (err, ...args) => {
           addLog(`received "app:win2main-reply" at renderer process: ${args}`);
         });
+      });
+      document.getElementById('win2all').addEventListener('click', () => {
+        addLog('send app:win2all foo, bar');
+        ipcPlus.sendToAll('app:win2all', 'foo', 'bar');
+      });
+      document.getElementById('win2all-exclude-self').addEventListener('click', () => {
+        addLog('send app:win2all foo, bar');
+        ipcPlus.sendToAll('app:win2all', 'foo', 'bar', ipcPlus.option({
+          excludeSelf: true
+        }));
+      });
+      document.getElementById('win2wins').addEventListener('click', () => {
+        addLog('send app:win2wins foo, bar');
+        ipcPlus.sendToWins('app:win2wins', 'foo', 'bar');
       });
     </script>
   </body>

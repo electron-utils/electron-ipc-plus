@@ -31,6 +31,10 @@ ipcPlus.on('app:main2all', (event, ...args) => {
   console.log(`received "app:main2all" at main process: ${args}`);
 });
 
+ipcPlus.on('app:win2all', (event, ...args) => {
+  console.log(`received "app:win2all" at main process: ${args}`);
+});
+
 ipcPlus.on('app:win2main-reply', (event, ...args) => {
   console.log(`received "app:win2main-reply" at main process: ${args}, reply: bar after 500ms`);
   setTimeout(() => {
@@ -43,7 +47,7 @@ ipcPlus.on('app:win2main-reply', (event, ...args) => {
 // ====================
 
 ipcMain.on('btn:main2all', () => {
-  console.log('send app:main2all: foo, bar');
+  console.log('send app:main2all foo, bar');
   ipcPlus.sendToAll('app:main2all', 'foo', 'bar');
 });
 
@@ -52,6 +56,11 @@ ipcMain.on('btn:main2all-exclude-self', () => {
   ipcPlus.sendToAll('app:main2all', 'foo', 'bar', ipcPlus.option({
     excludeSelf: true
   }));
+});
+
+ipcMain.on('btn:main2wins', () => {
+  console.log('send app:main2wins foo, bar');
+  ipcPlus.sendToWins('app:main2wins', 'foo', 'bar');
 });
 
 ipcMain.on('btn:main2win', (event) => {

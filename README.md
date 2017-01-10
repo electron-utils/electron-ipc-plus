@@ -1,4 +1,9 @@
-# electron-ipc
+# electron-ipc-plus
+
+[![Linux Build Status](https://travis-ci.org/electron-utils/electron-ipc-plus.svg?branch=master)](https://travis-ci.org/electron-utils/electron-ipc-plus)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/crnftwhvfxyldw75?svg=true)](https://ci.appveyor.com/project/jwu/electron-ipc-plus)
+[![Dependency Status](https://david-dm.org/electron-utils/electron-ipc-plus.svg)](https://david-dm.org/electron-utils/electron-ipc-plus)
+[![devDependency Status](https://david-dm.org/electron-utils/electron-ipc-plus/dev-status.svg)](https://david-dm.org/electron-utils/electron-ipc-plus#info=devDependencies)
 
 Improved IPC for Electron
 

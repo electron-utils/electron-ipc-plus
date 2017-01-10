@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Electron App</title>
+  </head>
+
+  <body>
+    <div class="label">Testing...</div>
+    <script>
+      const ipcPlus = require('../../../index.js');
+
+      ipcPlus.on('app:hello', (event, ...args) => {
+        console.log(`app:hello ${args}`);
+      });
+
+      ipcPlus.on('app:all-windows-ready', (event, ...args) => {
+        ipcPlus.sendToWins('app:hello', ipcPlus.option({excludeSelf: true}));
+        ipcPlus.sendToWins('app:hello', 'alpha', ipcPlus.option({excludeSelf: true}));
+        ipcPlus.sendToWins('app:hello', 'beta', ipcPlus.option({excludeSelf: true}));
+        ipcPlus.sendToWins('app:hello', 'cell', ipcPlus.option({excludeSelf: true}));
+      });
+    </script>
+  </body>
+</html>
