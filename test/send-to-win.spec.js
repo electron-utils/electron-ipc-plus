@@ -23,7 +23,7 @@ describe('app-main2win', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()

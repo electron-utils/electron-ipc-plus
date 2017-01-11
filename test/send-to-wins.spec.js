@@ -23,7 +23,7 @@ describe('app-main2wins', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()
@@ -82,7 +82,7 @@ describe('app-win2wins', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()
@@ -142,7 +142,7 @@ describe('app-win2wins-exclude-self', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()

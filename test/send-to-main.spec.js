@@ -23,7 +23,7 @@ describe('app-win2main', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()
@@ -61,7 +61,7 @@ describe('app-main2main', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.electron.remote.getGlobal('ipcCalls')
       .then(function (ipcCalls) {
         assert.equal(ipcCalls.length, 4);

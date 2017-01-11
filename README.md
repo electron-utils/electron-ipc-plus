@@ -32,9 +32,9 @@ npm start example
 **main process**
 
 ```javascript
-const ipcPlus = require('electron-ipc-plus');
+const ipcPlusM = require('electron-ipc-plus');
 
-ipcPlus.sendToWin(browserWin, 'app:say-hello', 'hello renderer process!', (err, message) => {
+ipcPlusM.sendToWin(browserWin, 'app:say-hello', 'hello renderer process!', (err, message) => {
   console.log(`renderer replied: ${message}`);
 });
 ```
@@ -42,9 +42,9 @@ ipcPlus.sendToWin(browserWin, 'app:say-hello', 'hello renderer process!', (err, 
 **renderer process**
 
 ```javascript
-const ipcPlus = require('electron-ipc-plus');
+const ipcPlusR = require('electron-ipc-plus');
 
-ipcPlus.on('app:say-hello', (event, message) => {
+ipcPlusR.on('app:say-hello', (event, message) => {
   console.log(`main process said: ${message}`);
 
   setTimeout(() => {
@@ -58,9 +58,9 @@ ipcPlus.on('app:say-hello', (event, message) => {
 **renderer process**
 
 ```javascript
-const ipcPlus = require('electron-ipc-plus');
+const ipcPlusR = require('electron-ipc-plus');
 
-ipcPlus.sendToMain(browserWin, 'app:say-hello', 'hello main process!', (err, message) => {
+ipcPlusR.sendToMain(browserWin, 'app:say-hello', 'hello main process!', (err, message) => {
   console.log(`main replied: ${message}`);
 });
 ```
@@ -68,9 +68,9 @@ ipcPlus.sendToMain(browserWin, 'app:say-hello', 'hello main process!', (err, mes
 **main process**
 
 ```javascript
-const ipcPlus = require('electron-ipc-plus');
+const ipcPlusM = require('electron-ipc-plus');
 
-ipcPlus.on('app:say-hello', (event, message) => {
+ipcPlusM.on('app:say-hello', (event, message) => {
   console.log(`renderer process said: ${message}`);
 
   setTimeout(() => {
@@ -81,8 +81,92 @@ ipcPlus.on('app:say-hello', (event, message) => {
 
 ## API
 
-TODO
+**Main Process**
+
+### Methods
+
+### ipcPlusM.option(opts)
+
+  - `opts` object
+    - `excludeSelf` boolean - exclude send ipc message to main process when calling `ipcPlusM.sendToAll`.
+
+Ipc option used in `ipcPlusM.sendToAll` and `ipcPlusM.sendToWins`.
+
+### ipcPlusM.sendToAll(message[, ...args, option])
+
+  - `message` string - Ipc message.
+  - `...args` ... - Whatever arguments the message needs.
+  - `option` object - You can indicate the last argument as an IPC option by `ipcPlusM.option({...})`.
+
+Send `message` with `...args` to all opened window and to main process asynchronously.
+
+### ipcPlusM.sendToWins(message[, ...args, option])
+
+TODO...
+
+### ipcPlusM.sendToMainSync(message[, ...args])
+
+TODO...
+
+### ipcPlusM.sendToMain(message[, ...args, callback, timeout])
+
+TODO...
+
+### ipcPlusM.sendToWin(win, message[, ...args, callback, timeout])
+
+TODO...
+
+### ipcPlusM.cancelRequest(sessionId)
+
+TODO...
+
+## Properties
+
+### ipcPlusM.debug
+
+Turn on/off the debug code in the module.
+
+------
+
+**Renderer Process**
+
+### ipcPlusR.option(opts)
+
+  - `opts` object
+    - `excludeSelf` boolean - exclude send ipc message to main process when calling `ipcPlusR.sendToAll`.
+
+Ipc option used in `ipcPlusR.sendToAll` and `ipcPlusR.sendToWins`.
+
+### ipcPlusR.sendToAll(message[, ...args, option])
+
+  - `message` string - Ipc message.
+  - `...args` ... - Whatever arguments the message needs.
+  - `option` object - You can indicate the last argument as an IPC option by `ipcPlusR.option({...})`.
+
+Send `message` with `...args` to all opened window and to main process asynchronously.
+
+### ipcPlusR.sendToWins(message[, ...args, option])
+
+TODO...
+
+### ipcPlusR.sendToMainSync(message[, ...args])
+
+TODO...
+
+### ipcPlusR.sendToMain(message[, ...args, callback, timeout])
+
+TODO...
+
+### ipcPlusR.cancelRequest(sessionId)
+
+TODO...
+
+## Properties
+
+### ipcPlusR.debug
+
+Turn on/off the debug code in the module.
 
 ## License
 
-MIT © 2016 Johnny Wu
+MIT © 2017 Johnny Wu

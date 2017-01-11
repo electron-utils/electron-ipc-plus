@@ -23,7 +23,7 @@ describe('app-main2all', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()
@@ -86,7 +86,7 @@ describe('app-main2all-exclude-self', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()
@@ -145,7 +145,7 @@ describe('app-win2all', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()
@@ -209,7 +209,7 @@ describe('app-win2all-exclude-self', function () {
     }
   });
 
-  it('should be received message in all process', function () {
+  it('should be ok', function () {
     return app.client
       .windowByIndex(0)
       .waitUntilWindowLoaded()
