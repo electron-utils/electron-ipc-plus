@@ -102,23 +102,116 @@ Send `message` with `...args` to all opened window and to main process asynchron
 
 ### ipcPlusM.sendToWins(message[, ...args, option])
 
-TODO...
+  - `message` string - Ipc message.
+  - `...args` ... - Whatever arguments the message needs.
+  - `option` object - You can indicate the last argument as an IPC option by `ipcPlusM.option({...})`.
 
-### ipcPlusM.sendToMainSync(message[, ...args])
+Send `message` with `...args` to all opened windows asynchronously. The renderer process can handle it by listening to the message through the `electron.ipcRenderer` or `ipcPlus` module.
 
-TODO...
+Example:
+
+**Send IPC message (main process)**
+
+```js
+const ipcPlusM = require('electron-ipc-plus');
+
+ipcPlusM.sendToWins('foobar:say-hello', 'Hello World!');
+```
+
+**Receive IPC message (renderer process)**
+
+```html
+<html>
+  <body>
+    <script>
+      const {ipcRenderer} = require('electron');
+
+      ipcRenderer.on('foobar:say-hello', (event, text) => {
+        console.log(text);  // Prints "Hello World!"
+      });
+    </script>
+  </body>
+</html>
+```
 
 ### ipcPlusM.sendToMain(message[, ...args, callback, timeout])
 
-TODO...
+ - `message` string - Ipc message.
+ - `...args` ... - Whatever arguments the message needs.
+ - `callback` function - You can specify a callback function to receive IPC reply at the last or the 2nd last argument.
+ - `timeout` number - You can specify a timeout for the callback at the last argument. If no timeout specified, it will be 5000ms.
+
+Returns `number` - If we have callback function, a session ID will returned.
+
+Example:
+
+**Send IPC message (main process)**
+
+```js
+const ipcPlusM = require('electron-ipc-plus');
+
+ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
+  if ( err.code === 'ETIMEOUT' ) {
+    console.error('Timeout for ipc message foobar:say-hello');
+    return;
+  }
+
+  console.log(`foobar replied: ${msg}`);
+});
+```
+
+**Receive and Reply IPC message (main process)**
+
+```js
+const {ipcMain} = require('electron');
+
+ipcMain.on('foobar:say-hello', event => {
+  event.reply(null, 'Hi');
+});
+```
 
 ### ipcPlusM.sendToWin(win, message[, ...args, callback, timeout])
 
-TODO...
+ - `win` BrowserWindow
+ - `message` string - Ipc message.
+ - `...args` ... - Whatever arguments the message needs.
+ - `callback` function - You can specify a callback function to receive IPC reply at the last or the 2nd last argument.
+ - `timeout` number - You can specify a timeout for the callback at the last argument. If no timeout specified, it will be 5000ms.
+
+Returns `number` - If we have callback function, a session ID will returned.
+
+Example:
+
+**Send IPC message (main process)**
+
+```js
+const ipcPlusM = require('electron-ipc-plus');
+
+ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
+  if ( err.code === 'ETIMEOUT' ) {
+    console.error('Timeout for ipc message foobar:say-hello');
+    return;
+  }
+
+  console.log(`foobar replied: ${msg}`);
+});
+```
+
+**Receive and Reply IPC message (renderer process)**
+
+```js
+const {ipcRenderer} = require('electron');
+
+ipcRenderer.on('foobar:say-hello', event => {
+  event.reply(null, 'Hi');
+});
+```
 
 ### ipcPlusM.cancelRequest(sessionId)
 
-TODO...
+  - `sessionId` number - The session ID.
+
+Cancel request sent to main or renderer process via `ipcPlusM.sendToMain` or `ipcPlusM.sendToWin`.
 
 ## Properties
 
