@@ -48,7 +48,7 @@ ipcPlusR.on('app:say-hello', (event, message) => {
   console.log(`main process said: ${message}`);
 
   setTimeout(() => {
-    event.reply('hi main process!');
+    event.reply(null, 'hi main process!');
   }, 500);
 });
 ```
@@ -74,7 +74,7 @@ ipcPlusM.on('app:say-hello', (event, message) => {
   console.log(`renderer process said: ${message}`);
 
   setTimeout(() => {
-    event.reply('hi renderer process!');
+    event.reply(null, 'hi renderer process!');
   }, 500);
 });
 ```
