@@ -112,7 +112,7 @@ Example:
 
 **Send IPC message (main process)**
 
-```js
+```javascript
 const ipcPlusM = require('electron-ipc-plus');
 
 ipcPlusM.sendToWins('foobar:say-hello', 'Hello World!');
@@ -147,7 +147,7 @@ Example:
 
 **Send IPC message (main process)**
 
-```js
+```javascript
 const ipcPlusM = require('electron-ipc-plus');
 
 ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
@@ -162,7 +162,7 @@ ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
 
 **Receive and Reply IPC message (main process)**
 
-```js
+```javascript
 const {ipcMain} = require('electron');
 
 ipcMain.on('foobar:say-hello', event => {
@@ -184,7 +184,7 @@ Example:
 
 **Send IPC message (main process)**
 
-```js
+```javascript
 const ipcPlusM = require('electron-ipc-plus');
 
 ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
@@ -199,7 +199,7 @@ ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
 
 **Receive and Reply IPC message (renderer process)**
 
-```js
+```javascript
 const {ipcRenderer} = require('electron');
 
 ipcRenderer.on('foobar:say-hello', event => {
@@ -250,7 +250,7 @@ Example:
 
 **Send IPC message (renderer process)**
 
-```js
+```javascript
 const ipcPlusR = require('electron-ipc-plus');
 
 ipcPlusR.sendToWins('foobar:say-hello', 'Hello World!');
@@ -278,7 +278,7 @@ Example:
 
 **Send IPC message (renderer process)**
 
-```js
+```javascript
 const ipcPlusR = require('electron-ipc-plus');
 
 ipcPlusR.sendToMain('foobar:say-hello', (err, msg) => {
@@ -293,7 +293,7 @@ ipcPlusR.sendToMain('foobar:say-hello', (err, msg) => {
 
 **Receive and Reply IPC message (main process)**
 
-```js
+```javascript
 const {ipcRenderer} = require('electron');
 
 ipcRenderer.on('foobar:say-hello', event => {
