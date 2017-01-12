@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Electron App</title>
+  </head>
+
+  <body>
+    <div class="label">Testing...</div>
+    <script>
+      const ipcPlus = require('../../../index.js');
+      let readyCnt = 0;
+
+      function ready () {
+        ++readyCnt;
+        if ( readyCnt === 4 ) {
+          // NOTE: we add more than 300ms to make sure timeout not returnned for 'app:hello cell'
+          setTimeout(() => {
+            document.querySelector('.label').innerText = 'Ready';
+          }, 300);
+        }
+      }
+
+      ipcPlus.sendToMain('app:hello', (err, msg) => {
+        ready();
+        if ( err && err.code === 'ETIMEOUT' ) {
+          console.log('timeout');
+          return;
+        }
+        console.log(`${msg}`);
+      }, 100);
+      ipcPlus.sendToMain('app:hello', 'alpha', (err, msg) => {
+        ready();
+        if ( err && err.code === 'ETIMEOUT' ) {
+          console.log('timeout alpha');
+          return;
+        }
+        console.log(`${msg}`);
+      }, 100);
+      ipcPlus.sendToMain('app:hello', 'beta', (err, msg) => {
+        ready();
+        if ( err && err.code === 'ETIMEOUT' ) {
+          console.log('timeout beta');
+          return;
+        }
+        console.log(`${msg}`);
+      }, 100);
+      ipcPlus.sendToMain('app:hello', 'cell', (err, msg) => {
+        ready();
+        if ( err && err.code === 'ETIMEOUT' ) {
+          console.log('timeout cell');
+          return;
+        }
+        console.log(`${msg}`);
+      }, 300);
+    </script>
+  </body>
+</html>

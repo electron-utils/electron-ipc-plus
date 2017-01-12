@@ -68,8 +68,7 @@ describe('app-win2main-reply-nested', function () {
   it('should be ok', function () {
     return app.client
       .windowByIndex(0)
-      .waitUntilWindowLoaded()
-      // .waitUntilTextExists('.label', 'Ready')
+      .waitUntilTextExists('.label', 'Ready')
       .getRenderProcessLogs()
       .then(function (logs) {
         assert.equal(logs.length, 8);
@@ -98,7 +97,49 @@ describe('app-win2main-reply-nested', function () {
   });
 });
 
-describe('app-win2main-reply-timeout', function () {
+describe('app-win2main-reply-error-timeout', function () {
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-win2main-reply-timeout')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.client
+      .windowByIndex(0)
+      .waitUntilTextExists('.label', 'Ready')
+      .getRenderProcessLogs()
+      .then(function (logs) {
+        assert.equal(logs.length, 4);
+        assert.ok(logs[0].message.indexOf('timeout') !== -1);
+        assert.ok(logs[1].message.indexOf('timeout alpha') !== -1);
+        assert.ok(logs[2].message.indexOf('timeout beta') !== -1);
+        assert.ok(logs[3].message.indexOf('cell received') !== -1);
+
+        return app.electron.remote.getGlobal('ipcCalls')
+          .then(function (ipcCalls) {
+            assert.equal(ipcCalls.length, 4);
+            assert.equal(ipcCalls[0], 'app:hello ');
+            assert.equal(ipcCalls[1], 'app:hello alpha');
+            assert.equal(ipcCalls[2], 'app:hello beta');
+            assert.equal(ipcCalls[3], 'app:hello cell');
+          });
+      });
+  });
+});
+
+describe('app-win2main-reply-error-reply-more-than-once', function () {
   // TODO
 });
 
@@ -106,18 +147,18 @@ describe('app-win2main-reply-cancel-request', function () {
   // TODO
 });
 
-describe('app-win2main-reply-win-destroyed', function () {
+describe('app-win2main-reply-error-win-destroyed', function () {
   // TODO
 });
 
-describe('app-win2main-reply-no-callback', function () {
+describe('app-win2main-reply-error-no-callback', function () {
   // TODO
 });
 
-describe('app-win2main-reply-first-arg-not-error-or-null', function () {
+describe('app-win2main-reply-error-first-arg-not-error-or-null', function () {
   // TODO
 });
 
-describe('app-win2main-reply-error', function () {
+describe('app-win2main-reply-error-user-return', function () {
   // TODO
 });
