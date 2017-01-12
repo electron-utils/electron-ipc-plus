@@ -79,6 +79,24 @@ ipcPlusM.on('app:say-hello', (event, message) => {
 });
 ```
 
+## FAQs
+
+### How can I know if an IPC is waiting for reply?
+
+Just check if `event.reply` exists:
+
+```javascript
+ipcMain.on('app:say-hello', (event, message) => {
+  if ( event.reply ) {
+    event.reply(null, 'hi renderer process!');
+  }
+});
+```
+
+### Can I reply a message for multiple times?
+
+Only the first reply will be handled, after that the session will be closed and the rest of replies will be ignored.
+
 ## API
 
 **Main Process**

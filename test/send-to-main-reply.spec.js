@@ -97,6 +97,48 @@ describe('app-win2main-reply-nested', function () {
   });
 });
 
+describe('app-win2main-reply-more-than-once', function () {
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-win2main-reply-more-than-once')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.client
+      .windowByIndex(0)
+      .waitUntilWindowLoaded()
+      .getRenderProcessLogs()
+      .then(function (logs) {
+        assert.equal(logs.length, 4);
+        assert.ok(logs[0].message.indexOf(' received') !== -1);
+        assert.ok(logs[1].message.indexOf('alpha received') !== -1);
+        assert.ok(logs[2].message.indexOf('beta received') !== -1);
+        assert.ok(logs[3].message.indexOf('cell received') !== -1);
+
+        return app.electron.remote.getGlobal('ipcCalls')
+          .then(function (ipcCalls) {
+            assert.equal(ipcCalls.length, 4);
+            assert.equal(ipcCalls[0], 'app:hello ');
+            assert.equal(ipcCalls[1], 'app:hello alpha');
+            assert.equal(ipcCalls[2], 'app:hello beta');
+            assert.equal(ipcCalls[3], 'app:hello cell');
+          });
+      });
+  });
+});
+
 describe('app-win2main-reply-error-timeout', function () {
   this.timeout(0);
   let app = null;
@@ -139,20 +181,112 @@ describe('app-win2main-reply-error-timeout', function () {
   });
 });
 
-describe('app-win2main-reply-error-reply-more-than-once', function () {
-  // TODO
-});
-
 describe('app-win2main-reply-cancel-request', function () {
-  // TODO
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-win2main-reply-cancel-request')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.client
+      .windowByIndex(0)
+      .waitUntilTextExists('.label', 'Ready')
+      .getRenderProcessLogs()
+      .then(function (logs) {
+        assert.equal(logs.length, 0);
+
+        return app.electron.remote.getGlobal('ipcCalls')
+          .then(function (ipcCalls) {
+            assert.equal(ipcCalls.length, 4);
+            assert.equal(ipcCalls[0], 'app:hello ');
+            assert.equal(ipcCalls[1], 'app:hello alpha');
+            assert.equal(ipcCalls[2], 'app:hello beta');
+            assert.equal(ipcCalls[3], 'app:hello cell');
+          });
+      });
+  });
 });
 
 describe('app-win2main-reply-error-win-destroyed', function () {
-  // TODO
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-win2main-reply-error-win-destroyed')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.client
+      .windowByIndex(0) // NOTE: yes, should be index-0, not index-1
+      .waitUntilTextExists('.label', 'Ready')
+      .then(function () {
+        return app.electron.remote.getGlobal('ipcCalls')
+          .then(function (ipcCalls) {
+            assert.equal(ipcCalls.length, 1);
+            assert.equal(ipcCalls[0], 'app:hello foobar');
+          });
+      });
+  });
 });
 
 describe('app-win2main-reply-error-no-callback', function () {
-  // TODO
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-win2main-reply-error-no-callback')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.client
+      .windowByIndex(0)
+      .waitUntilWindowLoaded()
+      .getRenderProcessLogs()
+      .then(function (logs) {
+        assert.equal(logs.length, 0);
+
+        return app.electron.remote.getGlobal('ipcCalls')
+          .then(function (ipcCalls) {
+            assert.equal(ipcCalls.length, 4);
+            assert.equal(ipcCalls[0], 'app:hello ');
+            assert.equal(ipcCalls[1], 'app:hello alpha');
+            assert.equal(ipcCalls[2], 'app:hello beta');
+            assert.equal(ipcCalls[3], 'app:hello cell');
+          });
+      });
+  });
 });
 
 describe('app-win2main-reply-error-first-arg-not-error-or-null', function () {
