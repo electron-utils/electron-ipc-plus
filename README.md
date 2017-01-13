@@ -241,6 +241,8 @@ Turn on/off the debug code in the module.
 
 **Renderer Process**
 
+## Methods
+
 ### ipcPlusR.option(opts)
 
   - `opts` object
