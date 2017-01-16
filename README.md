@@ -235,7 +235,7 @@ Cancel request sent to main or renderer process via `ipcPlusM.sendToMain` or `ip
 
 ### ipcPlusM.debug
 
-Turn on/off the debug code in the module.
+Turn on/off the debug information. No use in current version.
 
 ------
 
@@ -331,7 +331,7 @@ Cancel request sent to main process via `ipcPlusR.sendToMain`.
 
 ### ipcPlusR.debug
 
-Turn on/off the debug code in the module.
+Turn on/off the debug information. No use in current version.
 
 ## License
 

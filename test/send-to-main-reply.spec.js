@@ -289,10 +289,10 @@ describe('app-win2main-reply-error-no-callback', function () {
   });
 });
 
-describe('app-win2main-reply-error-first-arg-not-error-or-null', function () {
+describe('app-win2main-reply-a-user-error', function () {
   // TODO
 });
 
-describe('app-win2main-reply-error-user-return', function () {
+describe('app-win2main-reply-error-first-arg-not-error-or-null', function () {
   // TODO
 });

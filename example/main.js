@@ -42,6 +42,13 @@ ipcPlus.on('app:win2main-reply', (event, ...args) => {
   }, 500);
 });
 
+ipcPlus.on('app:win2main-reply-error', (event, ...args) => {
+  console.log(`received "app:win2main-reply-error" at main process: ${args}, reply: bar after 500ms`);
+  setTimeout(() => {
+    event.reply(new Error('Hello'));
+  }, 500);
+});
+
 // ====================
 // handle buttons
 // ====================

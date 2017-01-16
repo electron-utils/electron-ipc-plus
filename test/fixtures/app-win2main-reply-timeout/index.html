@@ -23,7 +23,7 @@
 
       ipcPlus.sendToMain('app:hello', (err, msg) => {
         ready();
-        if ( err && err.code === 'ETIMEOUT' ) {
+        if ( err && err.code === 'ETIMEDOUT' ) {
           console.log('timeout');
           return;
         }
@@ -31,7 +31,7 @@
       }, 100);
       ipcPlus.sendToMain('app:hello', 'alpha', (err, msg) => {
         ready();
-        if ( err && err.code === 'ETIMEOUT' ) {
+        if ( err && err.code === 'ETIMEDOUT' ) {
           console.log('timeout alpha');
           return;
         }
@@ -39,7 +39,7 @@
       }, 100);
       ipcPlus.sendToMain('app:hello', 'beta', (err, msg) => {
         ready();
-        if ( err && err.code === 'ETIMEOUT' ) {
+        if ( err && err.code === 'ETIMEDOUT' ) {
           console.log('timeout beta');
           return;
         }
@@ -47,7 +47,7 @@
       }, 100);
       ipcPlus.sendToMain('app:hello', 'cell', (err, msg) => {
         ready();
-        if ( err && err.code === 'ETIMEOUT' ) {
+        if ( err && err.code === 'ETIMEDOUT' ) {
           console.log('timeout cell');
           return;
         }
