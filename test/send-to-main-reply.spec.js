@@ -290,9 +290,121 @@ describe('app-win2main-reply-error-no-callback', function () {
 });
 
 describe('app-win2main-reply-a-user-error', function () {
-  // TODO
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-win2main-reply-a-user-error')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.client
+      .windowByIndex(0)
+      .waitUntilWindowLoaded()
+      .getRenderProcessLogs()
+      .then(function (logs) {
+        assert.equal(logs.length, 4);
+        assert.ok(logs[0].message.indexOf('Error: user,  failed') !== -1);
+        assert.ok(logs[1].message.indexOf('Error: user, alpha failed') !== -1);
+        assert.ok(logs[2].message.indexOf('Error: user, beta failed') !== -1);
+        assert.ok(logs[3].message.indexOf('Error: user, cell failed') !== -1);
+
+        return app.electron.remote.getGlobal('ipcCalls')
+          .then(function (ipcCalls) {
+            assert.equal(ipcCalls.length, 4);
+            assert.equal(ipcCalls[0], 'app:hello ');
+            assert.equal(ipcCalls[1], 'app:hello alpha');
+            assert.equal(ipcCalls[2], 'app:hello beta');
+            assert.equal(ipcCalls[3], 'app:hello cell');
+          });
+      });
+  });
 });
 
-describe('app-win2main-reply-error-first-arg-not-error-or-null', function () {
-  // TODO
+describe('app-win2main-reply-error-invalid-first-arg', function () {
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-win2main-reply-invalid-first-arg')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.client
+      .windowByIndex(0)
+      .waitUntilWindowLoaded()
+      .getRenderProcessLogs()
+      .then(function (logs) {
+        assert.equal(logs.length, 4);
+        assert.ok(logs[0].message.indexOf('EINVALIDARGS,  received') !== -1);
+        assert.ok(logs[1].message.indexOf('EINVALIDARGS, alpha received') !== -1);
+        assert.ok(logs[2].message.indexOf('EINVALIDARGS, beta received') !== -1);
+        assert.ok(logs[3].message.indexOf('EINVALIDARGS, cell received') !== -1);
+
+        return app.electron.remote.getGlobal('ipcCalls')
+          .then(function (ipcCalls) {
+            assert.equal(ipcCalls.length, 4);
+            assert.equal(ipcCalls[0], 'app:hello ');
+            assert.equal(ipcCalls[1], 'app:hello alpha');
+            assert.equal(ipcCalls[2], 'app:hello beta');
+            assert.equal(ipcCalls[3], 'app:hello cell');
+          });
+      });
+  });
+});
+
+describe('app-main2main-reply', function () {
+  this.timeout(0);
+  let app = null;
+
+  before(function () {
+    app = new Application({
+      path: electron,
+      args: [path.join(__dirname, 'fixtures', 'app-main2main-reply')]
+    });
+    return app.start();
+  });
+
+  after(function () {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  it('should be ok', function () {
+    return app.electron.remote.getGlobal('ipcCalls')
+      .then(function (ipcCalls) {
+        assert.equal(ipcCalls.length, 10);
+        assert.equal(ipcCalls[0], 'app:hello ');
+        assert.equal(ipcCalls[1], ' received');
+        assert.equal(ipcCalls[2], 'app:hello alpha');
+        assert.equal(ipcCalls[3], 'alpha received');
+        assert.equal(ipcCalls[4], 'app:hello beta');
+        assert.equal(ipcCalls[5], 'beta received');
+        assert.equal(ipcCalls[6], 'app:hello cell');
+        assert.equal(ipcCalls[7], 'cell received');
+        assert.equal(ipcCalls[8], 'app:hello foobar');
+        assert.equal(ipcCalls[9], 'Error: user, foobar failed');
+      });
+  });
 });

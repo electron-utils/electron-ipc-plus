@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Electron App</title>
+  </head>
+
+  <body>
+    <div class="label">Testing...</div>
+    <script>
+      const ipcPlus = require('../../../index.js');
+
+      ipcPlus.sendToMain('app:hello', (err, msg) => {
+        console.log(`${err.code}, ${msg}`);
+      });
+      ipcPlus.sendToMain('app:hello', 'alpha', (err, msg) => {
+        console.log(`${err.code}, ${msg}`);
+      });
+      ipcPlus.sendToMain('app:hello', 'beta', (err, msg) => {
+        console.log(`${err.code}, ${msg}`);
+      });
+      ipcPlus.sendToMain('app:hello', 'cell', (err, msg) => {
+        console.log(`${err.code}, ${msg}`);
+      });
+    </script>
+  </body>
+</html>
