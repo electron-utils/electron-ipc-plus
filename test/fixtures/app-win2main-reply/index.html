@@ -11,16 +11,16 @@
       const ipcPlus = require('../../../index.js');
 
       ipcPlus.sendToMain('app:hello', (err, msg) => {
-        console.log(`${msg}`);
+        console.log(`app:hello ${msg}`);
       });
       ipcPlus.sendToMain('app:hello', 'alpha', (err, msg) => {
-        console.log(`${msg}`);
+        console.log(`app:hello ${msg}`);
       });
       ipcPlus.sendToMain('app:hello', 'beta', (err, msg) => {
-        console.log(`${msg}`);
+        console.log(`app:hello ${msg}`);
       });
       ipcPlus.sendToMain('app:hello', 'cell', (err, msg) => {
-        console.log(`${msg}`);
+        console.log(`app:hello ${msg}`);
       });
     </script>
   </body>

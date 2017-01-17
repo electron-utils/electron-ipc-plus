@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Electron App</title>
+  </head>
+
+  <body>
+    <div class="label">Testing...</div>
+    <script>
+      const ipcPlus = require('../../../index.js');
+      function ready () {
+        document.querySelector('.label').innerText = 'Ready';
+      }
+
+      ipcPlus.on('app:hello', (event, ...args) => {
+        console.log(`app:hello ${args}`);
+        event.reply(null, `${args} received`);
+      });
+
+      ipcPlus.on('app:hello-nested', (event, ...args) => {
+        console.log(`app:hello-nested ${args}`);
+        event.reply(null, `${args} received`);
+
+        ready();
+      });
+    </script>
+  </body>
+</html>
