@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Electron App</title>
+  </head>
+
+  <body>
+    <div class="label">Testing...</div>
+    <script>
+      const ipcPlus = require('../../../index.js');
+      let readyCnt = 0;
+
+      function ready () {
+        ++readyCnt;
+        if ( readyCnt === 4 ) {
+          // NOTE: we add more than 300ms to make sure timeout not returnned for 'app:hello cell'
+          setTimeout(() => {
+            document.querySelector('.label').innerText = 'Ready';
+          }, 300);
+        }
+      }
+
+      ipcPlus.on('app:hello', (event, ...args) => {
+        console.log(`app:hello ${args}`);
+        setTimeout(() => {
+          event.reply(null, `${args} received`);
+          ready();
+        }, 200);
+      });
+    </script>
+  </body>
+</html>

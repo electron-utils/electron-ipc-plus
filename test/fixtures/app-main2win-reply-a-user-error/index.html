@@ -16,7 +16,7 @@
 
       ipcPlus.on('app:hello', (event, ...args) => {
         console.log(`app:hello ${args}`);
-        event.reply(null, `${args} received`);
+        event.reply(new Error('user'), `${args} failed`);
 
         ready();
       });

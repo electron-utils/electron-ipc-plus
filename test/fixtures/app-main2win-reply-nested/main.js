@@ -44,68 +44,72 @@ function domReady () {
     });
 
     // win1
-    ipcPlus.sendToWin(wins[1], 'app:hello', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
-
-      ipcPlus.sendToWin(wins[1], 'app:hello-nested', (err, msg) => {
+    setTimeout(() => {
+      ipcPlus.sendToWin(wins[1], 'app:hello', (err, msg) => {
         if ( err ) {
           global.ipcCalls.push(`${err}, ${msg}`);
           return;
         }
         global.ipcCalls.push(`${msg}`);
-      });
-    });
-    ipcPlus.sendToWin(wins[1], 'app:hello', 'beta', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
 
-      ipcPlus.sendToWin(wins[1], 'app:hello-nested', 'beta-nested', (err, msg) => {
+        ipcPlus.sendToWin(wins[1], 'app:hello-nested', (err, msg) => {
+          if ( err ) {
+            global.ipcCalls.push(`${err}, ${msg}`);
+            return;
+          }
+          global.ipcCalls.push(`${msg}`);
+        });
+      });
+      ipcPlus.sendToWin(wins[1], 'app:hello', 'beta', (err, msg) => {
         if ( err ) {
           global.ipcCalls.push(`${err}, ${msg}`);
           return;
         }
         global.ipcCalls.push(`${msg}`);
+
+        ipcPlus.sendToWin(wins[1], 'app:hello-nested', 'beta-nested', (err, msg) => {
+          if ( err ) {
+            global.ipcCalls.push(`${err}, ${msg}`);
+            return;
+          }
+          global.ipcCalls.push(`${msg}`);
+        });
       });
-    });
+    }, 100);
 
     // win2
-    ipcPlus.sendToWin(wins[2], 'app:hello', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
-
-      ipcPlus.sendToWin(wins[2], 'app:hello-nested', (err, msg) => {
+    setTimeout(() => {
+      ipcPlus.sendToWin(wins[2], 'app:hello', (err, msg) => {
         if ( err ) {
           global.ipcCalls.push(`${err}, ${msg}`);
           return;
         }
         global.ipcCalls.push(`${msg}`);
-      });
-    });
-    ipcPlus.sendToWin(wins[2], 'app:hello', 'cell', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
 
-      ipcPlus.sendToWin(wins[2], 'app:hello-nested', 'cell-nested', (err, msg) => {
+        ipcPlus.sendToWin(wins[2], 'app:hello-nested', (err, msg) => {
+          if ( err ) {
+            global.ipcCalls.push(`${err}, ${msg}`);
+            return;
+          }
+          global.ipcCalls.push(`${msg}`);
+        });
+      });
+      ipcPlus.sendToWin(wins[2], 'app:hello', 'cell', (err, msg) => {
         if ( err ) {
           global.ipcCalls.push(`${err}, ${msg}`);
           return;
         }
         global.ipcCalls.push(`${msg}`);
+
+        ipcPlus.sendToWin(wins[2], 'app:hello-nested', 'cell-nested', (err, msg) => {
+          if ( err ) {
+            global.ipcCalls.push(`${err}, ${msg}`);
+            return;
+          }
+          global.ipcCalls.push(`${msg}`);
+        });
       });
-    });
+    }, 200);
   }
 }
 

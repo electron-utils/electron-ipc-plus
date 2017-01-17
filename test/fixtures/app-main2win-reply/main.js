@@ -11,6 +11,7 @@ function domReady () {
   ++readyCnt;
 
   if ( readyCnt === maxWins ) {
+    // win0
     ipcPlus.sendToWin(wins[0], 'app:hello', (err, msg) => {
       if ( err ) {
         global.ipcCalls.push(`${err}, ${msg}`);
@@ -26,35 +27,41 @@ function domReady () {
       global.ipcCalls.push(`${msg}`);
     });
 
-    ipcPlus.sendToWin(wins[1], 'app:hello', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
-    });
-    ipcPlus.sendToWin(wins[1], 'app:hello', 'beta', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
-    });
+    // win1
+    setTimeout(() => {
+      ipcPlus.sendToWin(wins[1], 'app:hello', (err, msg) => {
+        if ( err ) {
+          global.ipcCalls.push(`${err}, ${msg}`);
+          return;
+        }
+        global.ipcCalls.push(`${msg}`);
+      });
+      ipcPlus.sendToWin(wins[1], 'app:hello', 'beta', (err, msg) => {
+        if ( err ) {
+          global.ipcCalls.push(`${err}, ${msg}`);
+          return;
+        }
+        global.ipcCalls.push(`${msg}`);
+      });
+    }, 100);
 
-    ipcPlus.sendToWin(wins[2], 'app:hello', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
-    });
-    ipcPlus.sendToWin(wins[2], 'app:hello', 'cell', (err, msg) => {
-      if ( err ) {
-        global.ipcCalls.push(`${err}, ${msg}`);
-        return;
-      }
-      global.ipcCalls.push(`${msg}`);
-    });
+    // win2
+    setTimeout(() => {
+      ipcPlus.sendToWin(wins[2], 'app:hello', (err, msg) => {
+        if ( err ) {
+          global.ipcCalls.push(`${err}, ${msg}`);
+          return;
+        }
+        global.ipcCalls.push(`${msg}`);
+      });
+      ipcPlus.sendToWin(wins[2], 'app:hello', 'cell', (err, msg) => {
+        if ( err ) {
+          global.ipcCalls.push(`${err}, ${msg}`);
+          return;
+        }
+        global.ipcCalls.push(`${msg}`);
+      });
+    }, 200);
   }
 }
 
