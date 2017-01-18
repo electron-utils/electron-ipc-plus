@@ -97,6 +97,30 @@ ipcMain.on('app:say-hello', (event, message) => {
 
 Only the first reply will be handled, after that the session will be closed and the rest of replies will be ignored.
 
+### What happen when the window closed and I still waiting the reply from it.
+
+An error with the code `'EWINCLOSED'` will be sent to your reply handler.
+
+```javascript
+ipcPlus.sendToWin(win, 'app:say-hello', (err, message) => {
+  if ( err.code === 'EWINCLOSED' ) {
+    console.error('Window closed');
+  }
+});
+```
+
+### What happen when the reply is timed out.
+
+An error with the code `'ETIMEDOUT'` will be sent to your reply handler.
+
+```javascript
+ipcPlus.sendToWin(win, 'app:say-hello', (err, message) => {
+  if ( err.code === 'ETIMEDOUT' ) {
+    console.error('Target failed to reply you: timedout for 100ms');
+  }
+}, 100);
+```
+
 ## API
 
 **Main Process**
