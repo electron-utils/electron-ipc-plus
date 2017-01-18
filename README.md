@@ -103,7 +103,7 @@ An error with the code `'EWINCLOSED'` will be sent to your reply handler.
 
 ```javascript
 ipcPlus.sendToWin(win, 'app:say-hello', (err, message) => {
-  if ( err.code === 'EWINCLOSED' ) {
+  if ( err && err.code === 'EWINCLOSED' ) {
     console.error('Window closed');
   }
 });
@@ -115,7 +115,7 @@ An error with the code `'ETIMEDOUT'` will be sent to your reply handler.
 
 ```javascript
 ipcPlus.sendToWin(win, 'app:say-hello', (err, message) => {
-  if ( err.code === 'ETIMEDOUT' ) {
+  if ( err && err.code === 'ETIMEDOUT' ) {
     console.error('Target failed to reply you: timedout for 100ms');
   }
 }, 100);
@@ -193,7 +193,7 @@ Example:
 const ipcPlusM = require('electron-ipc-plus');
 
 ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
-  if ( err.code === 'ETIMEOUT' ) {
+  if ( err && err.code === 'ETIMEOUT' ) {
     console.error('Timeout for ipc message foobar:say-hello');
     return;
   }
@@ -230,7 +230,7 @@ Example:
 const ipcPlusM = require('electron-ipc-plus');
 
 ipcPlusM.sendToMain('foobar:say-hello', (err, msg) => {
-  if ( err.code === 'ETIMEOUT' ) {
+  if ( err && err.code === 'ETIMEOUT' ) {
     console.error('Timeout for ipc message foobar:say-hello');
     return;
   }
@@ -326,7 +326,7 @@ Example:
 const ipcPlusR = require('electron-ipc-plus');
 
 ipcPlusR.sendToMain('foobar:say-hello', (err, msg) => {
-  if ( err.code === 'ETIMEOUT' ) {
+  if ( err && err.code === 'ETIMEOUT' ) {
     console.error('Timeout for ipc message foobar:say-hello');
     return;
   }
