@@ -1,9 +1,8 @@
 ## CHANGELOG
 
-### v1.2.0 (developing)
+### v1.2.0
 
-  - [TODO] Window closed will force close all sessions relate with it in main process
-    - The closed session will reply Error ?
+  - Window closed will force close all sessions relate with it in main process.
 
 ### v1.1.0
 
