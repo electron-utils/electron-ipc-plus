@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/jwu/electron-ipc-plus",
   "dependencies": {
-    "electron-platform": "^1.1.0"
+    "electron-platform": "^1.2.0"
   },
   "devDependencies": {
     "electron": "^1.4.14",
