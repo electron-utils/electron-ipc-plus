@@ -79,7 +79,7 @@ ipcPlusM.on('app:say-hello', (event, message) => {
 });
 ```
 
-## FAQs
+## FAQ
 
 ### How can I know if an IPC is waiting for reply?
 
