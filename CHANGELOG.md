@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.2.1
+
+  - Fix window close will not clear caches in main process.
+
 ### v1.2.0
 
   - Window closed will force close all sessions relate with it in main process.
