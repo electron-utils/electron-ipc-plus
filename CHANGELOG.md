@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.2.3
+
+  - Register window `closed` event in `app.on('browser-window-created')`.
+
 ### v1.2.2
 
   - Add `ipcPlus.internal` for internal use.
