@@ -16,10 +16,10 @@ Improved IPC for Electron
 ## Install
 
 ```bash
-npm install electron-ipc
+npm install --save electron-ipc-plus
 ```
 
-Run the example:
+## Run The Example
 
 ```bash
 npm start example
