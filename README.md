@@ -121,6 +121,24 @@ ipcPlus.sendToWin(win, 'app:say-hello', (err, message) => {
 }, 100);
 ```
 
+## Known Issues
+
+### ipcPlus.sendToWin could leave wild sessions in main process when the window reload.
+
+I try to solve this problem by:
+
+```javascript
+app.on('browser-window-created', (event, browserWin) => {
+  // close all session once the window closed
+  browserWin.webContents.once('did-navigate', () => {
+    _closeAllSessionsInWin(browserWin);
+  });
+});
+```
+
+The only problem is 'did-navigate' will be triggerred the at the first time we open the window. Currently
+the best way to solve it is wrapping your own reload function, and manually close all sessions in that wrapped function.
+
 ## API
 
 **Main Process**
