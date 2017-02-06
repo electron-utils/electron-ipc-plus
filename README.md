@@ -125,7 +125,7 @@ ipcPlus.sendToWin(win, 'app:say-hello', (err, message) => {
 
 ### ipcPlus.sendToWin could leave wild sessions in main process when the window reload.
 
-I try to solve this problem by:
+I try to solve this problem by the code below:
 
 ```javascript
 app.on('browser-window-created', (event, browserWin) => {
@@ -136,8 +136,8 @@ app.on('browser-window-created', (event, browserWin) => {
 });
 ```
 
-The only problem is 'did-navigate' will be triggerred the at the first time we open the window. Currently
-the best way to solve it is wrapping your own reload function, and manually close all sessions in that wrapped function.
+The problem is 'did-navigate' will be triggerred at the first time we open the window and I disable the above solution and leave this to user.
+Currently the best way to solve it is wrapping your own reload function, and manually close all sessions in that wrapped function.
 
 ## API
 
