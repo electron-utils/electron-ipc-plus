@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "main": "main.js",
   "dependencies": {
-    "electron-ipc-plus": "1.3.1"
+    "electron-ipc-plus": "1.3.2"
   }
 }
