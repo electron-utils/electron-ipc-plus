@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.3.1
+
+  - Add version protection warning message.
+
 ### v1.3.0
 
   - Add version protection so that different versions of the `electorn-ipc-plus` can run in the same process.
