@@ -1,5 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
-const ipcPlus = require('../index.js');
+const ipcPlus = require('../../index.js');
 
 let win0, win1;
 

@@ -22,7 +22,7 @@ npm install --save electron-ipc-plus
 ## Run The Example
 
 ```bash
-npm start example
+npm start examples/${name}
 ```
 
 ## Usage
@@ -138,6 +138,11 @@ app.on('browser-window-created', (event, browserWin) => {
 
 The problem is 'did-navigate' will be triggerred at the first time we open the window and I disable the above solution and leave this to user.
 Currently the best way to solve it is wrapping your own reload function, and manually close all sessions in that wrapped function.
+
+### Different versions of electron-ipc-plus.
+
+If we developing an Electron app that have different modules depends on `electron-ipc-plus`, and the version of the `electron-ipc-plus` are different.
+We will receive a warning message in main process.
 
 ## API
 

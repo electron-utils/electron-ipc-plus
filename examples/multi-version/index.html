@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello</title>
+    <style>
+      hr {
+        height: 1px;
+        background: black;
+        border: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="foo">foo</button>
+    <hr/>
+
+    <script>
+      const foo = require('foo');
+      const bar = require('bar');
+
+      // ====================
+      // handle buttons
+      // ====================
+
+      document.getElementById('foo').addEventListener('click', () => {
+        foo.ipcPlus.sendToMain('app:hello', () => {
+          console.log('Reply from app');
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.3.0
+
+  - Add version protection so that different versions of the `electorn-ipc-plus` can run in the same process.
+
 ### v1.2.3
 
   - Register window `closed` event in `app.on('browser-window-created')`.
