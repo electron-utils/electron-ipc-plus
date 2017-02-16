@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.3.2
+
+  - Better warning message for version conflict.
+
 ### v1.3.1
 
   - Add version protection warning message.
