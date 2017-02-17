@@ -36,7 +36,7 @@ function domReady () {
       return;
     }
     global.ipcCalls.push(`${msg}`);
-  }, 300);
+  }, 400);
 }
 
 app.on('ready', function () {
