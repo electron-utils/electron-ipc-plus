@@ -141,8 +141,8 @@ Currently the best way to solve it is wrapping your own reload function, and man
 
 ### Different versions of electron-ipc-plus.
 
-If we developing an Electron app that have different modules depends on `electron-ipc-plus`, and the version of the `electron-ipc-plus` are different.
-We will receive a warning message in main process.
+When running an Electron app that has several modules depends on different version of `electron-ipc-plus`,
+we will receive a warning message.
 
 ## API Reference
 
