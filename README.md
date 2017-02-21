@@ -146,8 +146,8 @@ we will receive a warning message.
 
 ## API Reference
 
-  - [Module: ipcPlus (main process)](./docs/ipc-main.md)
-  - [Module: ipcPlus (renderer process)](./docs/ipc-renderer.md)
+  - [Module: ipcPlus (main process)](docs/ipc-main.md)
+  - [Module: ipcPlus (renderer process)](docs/ipc-renderer.md)
 
 ## License
 
