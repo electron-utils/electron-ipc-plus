@@ -4,7 +4,7 @@
   "description": "Improved IPC operations for electron",
   "main": "index.js",
   "scripts": {
-    "start": "node run.js",
+    "start": "electron",
     "test": "mocha test/*.spec.js"
   },
   "repository": {
