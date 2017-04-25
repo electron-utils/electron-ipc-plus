@@ -60,7 +60,7 @@ ipcPlusR.on('app:say-hello', (event, message) => {
 ```javascript
 const ipcPlusR = require('electron-ipc-plus');
 
-ipcPlusR.sendToMain(browserWin, 'app:say-hello', 'hello main process!', (err, message) => {
+ipcPlusR.sendToMain('app:say-hello', 'hello main process!', (err, message) => {
   console.log(`main replied: ${message}`);
 });
 ```
