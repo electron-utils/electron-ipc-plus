@@ -17,6 +17,10 @@ Ipc option used in `ipcPlusR.sendToAll` and `ipcPlusR.sendToWins`.
 
 Send `message` with `...args` to all opened window and to main process asynchronously.
 
+**NOTE**
+
+This is a broadcast method, it will not recieve callback.
+
 ### ipcPlusR.sendToWins(message[, ...args, option])
 
   - `message` string - Ipc message.
@@ -24,6 +28,10 @@ Send `message` with `...args` to all opened window and to main process asynchron
   - `option` object - You can indicate the last argument as an IPC option by `ipcPlusR.option({...})`.
 
 Send `message` with `...args` to all opened windows asynchronously. The renderer process can handle it by listening to the message through the `electron.ipcRenderer` or `ipcPlus` module.
+
+**NOTE**
+
+This is a broadcast method, it will not recieve callback.
 
 Example:
 
